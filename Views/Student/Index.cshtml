@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model IEnumerable<NghiemHuuHoaiBTH2.Models.Student>
+
+<div>
+    <a class="btn btn-success" asp-action="Create">Create a new Student</a>
+</div>
+
+<table class="table table-all">
+    <tr>
+        <th>Student ID</th>
+        <th>Student Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.StudentID</td>
+            <td>@item.StudentName</td>
+        </tr>
+    }
+</table>
