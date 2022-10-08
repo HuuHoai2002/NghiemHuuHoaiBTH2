@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Employee";
+}
+@model IEnumerable<NghiemHuuHoaiBTH2.Models.Employee>
+
+<div>
+    <a class="btn btn-success" asp-action="Create">Create a new Employee</a>
+</div>
+
+<table class="table table-all">
+    <tr>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EmployeeID</td>
+            <td>@item.EmployeeName</td>
+        </tr>
+    }
+</table>

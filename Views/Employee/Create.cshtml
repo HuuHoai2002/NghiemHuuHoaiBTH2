@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Create New Employee";
+}
+
+<form asp-action="Create" class="">
+    <div class="form-group">
+        <label for="name">EmployeeID</label>
+        <input type="text" class="form-control" id="name" aria-describedby="" name="EmployeeID"
+            placeholder="Enter Employee id">
+    </div>
+    <div class="form-group">
+        <label for="name">EmployeeName</label>
+        <input type="text" class="form-control" id="name" aria-describedby="" name="EmployeeName"
+            placeholder="Enter Employee name">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Create</button>
+    </div>
+</form>
