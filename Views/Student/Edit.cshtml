@@ -1,0 +1,29 @@
+@model NghiemHuuHoaiBTH2.Models.Student
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4 class="py-5">Sửa thông tin sinh viên</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Edit">
+            <span asp-validation-sumary="ModelOnly"></span>
+            <input type="hidden" value="@Model.StudentID" asp-for="StudentID" />
+            <div class="form-group">
+                <label asp-for="StudentName" class="control-label">Name</label>
+                <input asp-for="StudentName" class="control-label" value="@Model.StudentName" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cập nhật" class="btn btn-primary" /> |
+                <a class="btn btn-success" asp-action="Index">Danh sách sinh viên</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

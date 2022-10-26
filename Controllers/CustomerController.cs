@@ -34,18 +34,75 @@ public class CustomerController : Controller
     return View(customer);
   }
 
-  // public async Task<IActionResult> Edit(int? id)
-  // {
-  //   if (id == null)
-  //   {
-  //     return NotFound();
-  //   }
-  //   var customer = await _context.Customers.FindAsync(id);
-  //   if (customer == null)
-  //   {
-  //     return NotFound();
-  //   }
-  //   return View(customer);
-  // }
+  public async Task<IActionResult> Edit(string id)
+  {
+    if (id == null)
+    {
+      return NotFound();
+    }
+    var customer = await _context.Customers.FindAsync(id);
+    if (customer == null)
+    {
+      return NotFound();
+    }
+    return View(customer);
+  }
+  [HttpPost]
+  public async Task<IActionResult> Edit(string id, [Bind("CustomerID, CustomerName")] Customer customer)
+  {
+    if (id != customer.CustomerID)
+    {
+      return NotFound();
+    }
+    if (ModelState.IsValid)
+    {
+      try
+      {
+        _context.Customers.Update(customer);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!CustomerExists(customer.CustomerID))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
+    }
+    return View(customer);
+  }
+  public async Task<IActionResult> Delete(string id)
+  {
+    if (id == null)
+    {
+      return NotFound();
+    }
+    var customer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerID == id);
+    if (customer == null)
+    {
+      return NotFound();
+    }
+
+    return View(customer);
+  }
+  [HttpPost, ActionName("Delete")]
+  [ValidateAntiForgeryToken]
+  public async Task<IActionResult> DeleteConfirmed(string id)
+  {
+    var customer = await _context.Customers.FindAsync(id);
+    if (customer != null)
+    {
+      _context.Customers.Remove(customer);
+      await _context.SaveChangesAsync();
+    }
+    return RedirectToAction(nameof(Index));
+  }
+
+  private bool CustomerExists(string id) => _context.Students.Any(e => e.StudentID == id);
 }
 

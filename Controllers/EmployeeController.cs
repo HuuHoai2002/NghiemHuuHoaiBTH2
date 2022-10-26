@@ -33,5 +33,76 @@ public class EmployeeController : Controller
     }
     return View(employee);
   }
+
+  public async Task<IActionResult> Edit(string id)
+  {
+    if (id == null)
+    {
+      return NotFound();
+    }
+    var employee = await _context.Employees.FindAsync(id);
+    if (employee == null)
+    {
+      return NotFound();
+    }
+    return View(employee);
+  }
+  [HttpPost]
+  public async Task<IActionResult> Edit(string id, [Bind("EmployeeID, EmployeeName")] Employee employee)
+  {
+    if (id != employee.EmployeeID)
+    {
+      return NotFound();
+    }
+    if (ModelState.IsValid)
+    {
+      try
+      {
+        _context.Employees.Update(employee);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!EmployeeExists(employee.EmployeeID))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
+    }
+    return View(employee);
+  }
+  public async Task<IActionResult> Delete(string id)
+  {
+    if (id == null)
+    {
+      return NotFound();
+    }
+    var employee = await _context.Employees.FirstOrDefaultAsync(e => e.EmployeeID == id);
+    if (employee == null)
+    {
+      return NotFound();
+    }
+
+    return View(employee);
+  }
+  [HttpPost, ActionName("Delete")]
+  [ValidateAntiForgeryToken]
+  public async Task<IActionResult> DeleteConfirmed(string id)
+  {
+    var employee = await _context.Employees.FindAsync(id);
+    if (employee != null)
+    {
+      _context.Employees.Remove(employee);
+      await _context.SaveChangesAsync();
+    }
+    return RedirectToAction(nameof(Index));
+  }
+
+  private bool EmployeeExists(string id) => _context.Employees.Any(e => e.EmployeeID == id);
 }
 
