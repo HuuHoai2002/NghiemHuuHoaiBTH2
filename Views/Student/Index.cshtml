@@ -11,12 +11,24 @@
     <tr>
         <th>Student ID</th>
         <th>Student Name</th>
+        <th>
+            Xoá
+        </th>
+        <th>
+            Sửa
+        </th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.StudentID</td>
             <td>@item.StudentName</td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
+            </td>
+            @* <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.StudentID">Edit</a>
+                </td> *@
         </tr>
     }
 </table>

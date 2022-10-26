@@ -8,16 +8,13 @@ namespace NghiemHuuHoaiBTH2.Controllers;
 
 public class CustomerController : Controller
 {
-  // set connect to database
   private readonly ApplicationDbContext _context;
-  // constructor
   public CustomerController(ApplicationDbContext context)
   {
     _context = context;
   }
   public async Task<IActionResult> Index()
   {
-    // get all student from database
     var model = await _context.Customers.ToListAsync();
     return View(model);
   }
@@ -25,17 +22,13 @@ public class CustomerController : Controller
   {
     return View();
   }
-  // action create student
   [HttpPost]
   public async Task<IActionResult> Create(Customer customer)
   {
     if (ModelState.IsValid)
     {
-      // add customer to database
-      _context.Add(customer);
-      // save database
+      _context.Customers.Add(customer);
       await _context.SaveChangesAsync();
-      // redirect to index action
       return RedirectToAction(nameof(Index));
     }
     return View(customer);

@@ -32,13 +32,33 @@ public class StudentController : Controller
     if (ModelState.IsValid)
     {
       // add student to database
-      _context.Add(student);
+      _context.Students.Add(student);
       // save database
       await _context.SaveChangesAsync();
       // redirect to index action
       return RedirectToAction(nameof(Index));
     }
     return View(student);
+  }
+
+  [HttpGet("/Student/Delete/{id}")]
+  public async Task<IActionResult> Delete(string? id)
+  {
+    if (id == null)
+    {
+      return NotFound();
+    }
+    // get student by id
+    var student = await _context.Students.FindAsync(id);
+    if (student != null)
+    {
+      // remove student from database
+      _context.Students.Remove(student);
+      // save database
+      await _context.SaveChangesAsync();
+    }
+    // redirect to index action
+    return RedirectToAction(nameof(Index));
   }
 }
 

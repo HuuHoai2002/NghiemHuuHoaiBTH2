@@ -8,16 +8,13 @@ namespace NghiemHuuHoaiBTH2.Controllers;
 
 public class EmployeeController : Controller
 {
-  // set connect to database
   private readonly ApplicationDbContext _context;
-  // constructor
   public EmployeeController(ApplicationDbContext context)
   {
     _context = context;
   }
   public async Task<IActionResult> Index()
   {
-    // get all student from database
     var model = await _context.Employees.ToListAsync();
     return View(model);
   }
@@ -25,17 +22,13 @@ public class EmployeeController : Controller
   {
     return View();
   }
-  // action create student
   [HttpPost]
   public async Task<IActionResult> Create(Employee employee)
   {
     if (ModelState.IsValid)
     {
-      // add employee to database
-      _context.Add(employee);
-      // save database
+      _context.Employees.Add(employee);
       await _context.SaveChangesAsync();
-      // redirect to index action
       return RedirectToAction(nameof(Index));
     }
     return View(employee);
