@@ -10,8 +10,8 @@ using NghiemHuuHoaiBTH2.Data;
 namespace NghiemHuuHoaiBTH2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221008013207_Create_Table_Employee")]
-    partial class Create_Table_Employee
+    [Migration("20221103001707_InitialState")]
+    partial class InitialState
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,10 @@ namespace NghiemHuuHoaiBTH2.Migrations
             modelBuilder.Entity("NghiemHuuHoaiBTH2.Models.Employee", b =>
                 {
                     b.Property<string>("EmployeeID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EmployeeName")

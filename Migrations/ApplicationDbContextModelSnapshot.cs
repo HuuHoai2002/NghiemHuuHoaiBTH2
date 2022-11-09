@@ -35,6 +35,10 @@ namespace NghiemHuuHoaiBTH2.Migrations
                     b.Property<string>("EmployeeID")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("EmployeeName")
                         .IsRequired()
                         .HasColumnType("TEXT");

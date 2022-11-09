@@ -265,3 +265,7 @@ C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\obj\Debug\net6.0\r
 C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\obj\Debug\net6.0\NghiemHuuHoaiBTH2.pdb
 C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\obj\Debug\net6.0\NghiemHuuHoaiBTH2.genruntimeconfig.cache
 C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\obj\Debug\net6.0\ref\NghiemHuuHoaiBTH2.dll
+C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\bin\Debug\net6.0\EPPlus.dll
+C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\bin\Debug\net6.0\EPPlus.Interfaces.dll
+C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\bin\Debug\net6.0\EPPlus.System.Drawing.dll
+C:\Users\Admin\OneDrive\Files\NET2-Database\NghiemHuuHoaiBTH2\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll

@@ -4,7 +4,7 @@
 
 namespace NghiemHuuHoaiBTH2.Migrations
 {
-    public partial class Create_Table_Employee : Migration
+    public partial class InitialState : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,8 @@ namespace NghiemHuuHoaiBTH2.Migrations
                 columns: table => new
                 {
                     EmployeeID = table.Column<string>(type: "TEXT", nullable: false),
-                    EmployeeName = table.Column<string>(type: "TEXT", nullable: false)
+                    EmployeeName = table.Column<string>(type: "TEXT", nullable: false),
+                    Address = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,6 +44,18 @@ namespace NghiemHuuHoaiBTH2.Migrations
                 {
                     table.PrimaryKey("PK_Persons", x => x.PersonID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    StudentID = table.Column<string>(type: "TEXT", nullable: false),
+                    StudentName = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.StudentID);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -55,6 +68,9 @@ namespace NghiemHuuHoaiBTH2.Migrations
 
             migrationBuilder.DropTable(
                 name: "Persons");
+
+            migrationBuilder.DropTable(
+                name: "Students");
         }
     }
 }

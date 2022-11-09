@@ -1,5 +1,6 @@
 using NghiemHuuHoaiBTH2.Data;
 using NghiemHuuHoaiBTH2.Models;
+using NghiemHuuHoaiBTH2.Models.Process;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace NghiemHuuHoaiBTH2.Controllers;
 public class EmployeeController : Controller
 {
   private readonly ApplicationDbContext _context;
+  private ExcelProcess _excelProcess = new ExcelProcess();
   public EmployeeController(ApplicationDbContext context)
   {
     _context = context;
@@ -32,6 +34,50 @@ public class EmployeeController : Controller
       return RedirectToAction(nameof(Index));
     }
     return View(employee);
+  }
+  [HttpGet]
+  public IActionResult Upload()
+  {
+    return View();
+  }
+  [HttpPost]
+  [ValidateAntiForgeryToken]
+  public async Task<IActionResult> Upload(IFormFile file)
+  {
+    if (file != null)
+    {
+      var fileExtension = Path.GetExtension(file.FileName);
+      if (fileExtension != ".xls" && fileExtension != ".xlsx")
+      {
+        ViewBag.Message = "This file format is not supported";
+        return View();
+      }
+      else
+      {
+        var fileName = DateTime.Now.ToBinary() + fileExtension;
+        var filePath = Path.Combine(Directory.GetCurrentDirectory() + "Uploads/Excels", fileName);
+        var fileLocation = new FileInfo(filePath).ToString();
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+          await file.CopyToAsync(stream);
+
+          var dataTable = _excelProcess.ExcelToDataTable(fileLocation);
+          for (int i = 0; i < dataTable.Rows.Count; i++)
+          {
+            var employee = new Employee();
+            employee.EmployeeID = dataTable.Rows[0][0].ToString();
+            employee.EmployeeName = dataTable.Rows[0][1].ToString();
+            employee.Address = dataTable.Rows[0][2].ToString();
+
+            _context.Employees.Add(employee);
+          }
+          await _context.SaveChangesAsync();
+          return RedirectToAction(nameof(Index));
+        }
+      }
+    }
+    return View();
   }
 
   public async Task<IActionResult> Edit(string id)
