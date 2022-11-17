@@ -1,4 +1,5 @@
-namespace NET2_Main.Models.Process;
+using System.Text.RegularExpressions;
+namespace NghiemHuuHoaiBTH2.Models.Process;
 
 public class StringProcess
 {
@@ -59,4 +60,18 @@ public class StringProcess
     return input;
   }
 
+  public string AutoGenerateCode(string input)
+  {
+    string result = "", numPart = "", strPart = "";
+    numPart = Regex.Match(input, @"\d+").Value;
+    strPart = Regex.Match(input, @"\D+").Value;
+    int num = int.Parse(numPart) + 1;
+
+    for (int i = 0; i < numPart.Length - num.ToString().Length; i++)
+    {
+      strPart += "0";
+    }
+    result = strPart + num.ToString();
+    return result;
+  }
 }

@@ -11,6 +11,8 @@
     <tr>
         <th>Student ID</th>
         <th>Student Name</th>
+        <th>Address</th>
+        <th>Faculty ID</th>
         <th>
             Xoá
         </th>
@@ -23,6 +25,8 @@
         <tr>
             <td>@item.StudentID</td>
             <td>@item.StudentName</td>
+            <td>@item.Address</td>
+            <td>@item.FacultyID</td>
             <td>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
             </td>

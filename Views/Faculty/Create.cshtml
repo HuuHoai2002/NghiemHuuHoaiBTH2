@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" class="">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="FacultyID">FacultyID</label>
+                <input name="FacultyID" class="form-control" value='@ViewData["FacultyID"]' />
+            </div>
+            <div class="form-group">
+                <label for="FacultyID">FacultyName</label>
+                <input name="FacultyName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Create</button>
+                <button asp-action="Index" class="btn btn-warning">Back to list</button>
+            </div>
+        </form>
+    </div>
+</div>
