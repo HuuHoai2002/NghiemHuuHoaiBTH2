@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form asp-action="Create" class="">
+    <div class="form-group">
+        <label for="name">StudentID</label>
+        <input type="text" class="form-control" id="name" aria-describedby="" name="StudentID"
+            placeholder="Enter student id">
+    </div>
+    <div class="form-group">
+        <label for="name">StudentName</label>
+        <input type="text" class="form-control" id="name" aria-describedby="" name="StudentName"
+            placeholder="Enter student name">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Create</button>
+    </div>
+</form>
